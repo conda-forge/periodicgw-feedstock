@@ -7,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/periodicgw-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/periodicgw-{{ version }}.tar.gz
   sha256: 0c83bf0d2c5a7b082ad543d4225f89f97e00b1a717b2b2247f04345f5ea57be7
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - matplotlib-base
     - numpy
-    - python >=3.6
+    - python >={{ python_min }}
     - scipy
 
 test:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://gitlab.com/scottkalevhansen/periodic-gw
